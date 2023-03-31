@@ -2,6 +2,7 @@ package patientqueue;
 
 import model.Patient;
 
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.PriorityQueue;
 
@@ -41,7 +42,9 @@ public class PatientPriorityQueueImpl implements PatientPriorityQueue {
 
     @Override
     public void displayAll() {
-
+        for (Patient nextPatient : queue) {
+            System.out.println(nextPatient);
+        }
     }
 
 }
