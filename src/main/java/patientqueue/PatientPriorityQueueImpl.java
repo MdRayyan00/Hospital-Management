@@ -2,12 +2,15 @@ package patientqueue;
 
 import model.Patient;
 
+import java.util.ListIterator;
 import java.util.PriorityQueue;
 
 public class PatientPriorityQueueImpl implements PatientPriorityQueue {
 
     private final PriorityQueue<Patient> queue =
-            new PriorityQueue<>((p1, p2) -> p2.getPriority() - p1.getPriority());
+            new PriorityQueue<>((p1, p2) -> {
+                return p2.getPriority() - p1.getPriority();
+            });
 
     @Override
     public void addPatient(Patient patient) {
@@ -21,7 +24,14 @@ public class PatientPriorityQueueImpl implements PatientPriorityQueue {
 
     @Override
     public void deletePatientById(int id) {
-
+        ListIterator<Patient> iterator = (ListIterator<Patient>) queue.iterator();
+        while (iterator.hasNext()) {
+            Patient next = iterator.next();
+            if (next.getId() == id) {
+                iterator.remove();
+                return;
+            }
+        }
     }
 
     @Override
