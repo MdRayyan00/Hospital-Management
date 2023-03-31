@@ -2,20 +2,14 @@ package patientqueue;
 
 import model.Patient;
 
-
 public interface PatientPriorityQueue {
+    void addPatient(Patient patient);
 
-    //Add patient
-    void insert(Patient patient);
+    Patient findMaxPriorityPatient();
 
-    //Find Min Priority Patient
-    Patient findMin();
+    void deletePatientById(int id);
 
-    //Find Max Priority Patient
-    Patient findMax();
+    void findPatientById(int id);
 
-    Patient findPatientById(int id);
-
-    //Delete patient
-    void deletePatient(int id);
+    void displayAll();
 }
