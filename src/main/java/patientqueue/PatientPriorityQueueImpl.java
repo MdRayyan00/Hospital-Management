@@ -2,11 +2,10 @@ package patientqueue;
 
 import model.Patient;
 
-import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.PriorityQueue;
 
-public class PatientPriorityQueueImpl implements PatientPriorityQueue {
+public class PatientPriorityQueueImpl implements PatientQueue {
 
     private final PriorityQueue<Patient> queue =
             new PriorityQueue<>((p1, p2) -> {

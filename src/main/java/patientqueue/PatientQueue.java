@@ -2,7 +2,7 @@ package patientqueue;
 
 import model.Patient;
 
-public interface PatientPriorityQueue {
+public interface PatientQueue {
     void addPatient(Patient patient);
 
     Patient findMaxPriorityPatient();
