@@ -7,10 +7,6 @@ public interface PatientQueue {
 
     Patient findMaxPriorityPatient();
 
-    /**
-     * Delete a patient by ID
-     * @param id Unique ID of a patient.
-     */
     void deletePatientById(int id);
 
     void findPatientById(int id);
