@@ -2,13 +2,20 @@ package patientqueue;
 
 import model.Patient;
 
+import java.util.Comparator;
+import java.util.Stack;
+
 public class PatientStackImpl implements PatientQueue {
     /**
      * @param patient
      */
+
+    Stack<Patient> stack = new Stack<>();
+
     @Override
     public void addPatient(Patient patient) {
-
+        stack.add(patient);
+        stack.sort(Comparator.comparingInt(Patient::getPriority));
     }
 
     /**
