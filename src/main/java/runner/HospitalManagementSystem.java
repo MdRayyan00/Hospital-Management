@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 
+/**
+ * Main class to implement priority queue using heaps.
+ * Perform various actions on the information of patients using the patient ID, date and time.
+ */
 public class HospitalManagementSystem {
     public static void main(String[] args) throws IOException {
         int[] countSizes = new int[]{5000, 30000, 116000};
@@ -20,14 +24,21 @@ public class HospitalManagementSystem {
             List<Patient> patients = new ExcelUtil().getFromExcel();
 
             System.out.println("Hospital management workflow for " + countSize + " input size using priority queue.");
-            hostpitalManagementWorkflow(countSize, patientPriorityQueue, patients);
+            hospitalManagementWorkflow(countSize, patientPriorityQueue, patients);
 
             System.out.println("Hospital management workflow for " + countSize + " input size using linked list as queue.");
-            hostpitalManagementWorkflow(countSize, patientListQueue, patients);
+            hospitalManagementWorkflow(countSize, patientListQueue, patients);
 
             System.out.println("-----------------------------");
         }
     }
+
+    /**
+     * Method to find and delete patient information from queue
+     *
+     * @param patientQueue Patient information
+     */
+
 
     private static void findAndDeletePatient(PatientQueue patientQueue) {
         Instant startTime = Instant.now();
@@ -39,7 +50,15 @@ public class HospitalManagementSystem {
 
     }
 
-    private static void hostpitalManagementWorkflow(int countSize, PatientQueue patientQueue, List<Patient> patients) {
+    /**
+     * Method defining the hospital management workflow
+     *
+     * @param countSize Data break-points
+     * @param patientQueue Patients in Queue
+     * @param patients
+     */
+
+    private static void hospitalManagementWorkflow(int countSize, PatientQueue patientQueue, List<Patient> patients) {
         addPatients(countSize, patientQueue, patients);
 
         displayAllPatients(patientQueue);
@@ -49,6 +68,11 @@ public class HospitalManagementSystem {
         treatAllPatientByPriority(patientQueue);
     }
 
+    /**
+     * Treating patients by the order of highest priority
+     *
+     * @param patientQueue patients in queue
+     */
     private static void treatAllPatientByPriority(PatientQueue patientQueue) {
         Instant startTime = Instant.now();
 
@@ -63,6 +87,11 @@ public class HospitalManagementSystem {
         System.out.println("Total Time to treat all patients " + (endTime.toEpochMilli() - startTime.toEpochMilli()) + "ms");
     }
 
+    /**
+     * Method to display all patients in the queue and calculate time taken
+     *
+     * @param patientQueue patients in queue
+     */
     private static void displayAllPatients(PatientQueue patientQueue) {
         Instant startTime = Instant.now();
         patientQueue.displayAll();
@@ -70,6 +99,15 @@ public class HospitalManagementSystem {
 
         System.out.println("Total Time to display all patients " + (endTime.toEpochMilli() - startTime.toEpochMilli()) + "ms");
     }
+
+    /**
+     * Method to add patients in the queue and calculate the time taken
+     *
+     * @param countSize
+     * @param patientQueue patients in queue
+     * @param patients
+     */
+
 
     private static void addPatients(int countSize, PatientQueue patientQueue, List<Patient> patients) {
         Instant startTime = Instant.now();

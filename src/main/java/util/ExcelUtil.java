@@ -20,6 +20,9 @@ import java.util.List;
 public class ExcelUtil {
     private static List<Patient> patientList;
 
+    /**
+     * Reading patient dataset from excel file.
+     */
     public List<Patient> getFromExcel() throws IOException {
 
         try {

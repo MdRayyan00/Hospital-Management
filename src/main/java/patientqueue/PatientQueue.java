@@ -2,6 +2,12 @@ package patientqueue;
 
 import model.Patient;
 
+/**
+ *
+ * Interface to perform queueing operation in regard to hospital management
+ *
+ */
+
 public interface PatientQueue {
     void addPatient(Patient patient);
 

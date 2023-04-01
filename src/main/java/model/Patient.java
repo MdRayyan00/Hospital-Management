@@ -2,6 +2,7 @@ package model;
 
 import java.time.Instant;
 
+
 public class Patient {
     private String name;
     private String priority;
@@ -15,6 +16,11 @@ public class Patient {
         this.time = time;
     }
 
+    /**
+     * Method returns patients information as a string
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Patient{" +
