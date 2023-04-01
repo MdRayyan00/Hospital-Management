@@ -49,4 +49,14 @@ public class Patient {
     public void setTime(Instant time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "name='" + name + '\'' +
+                ", priority='" + priority + '\'' +
+                ", id=" + id +
+                ", time=" + time +
+                '}';
+    }
 }

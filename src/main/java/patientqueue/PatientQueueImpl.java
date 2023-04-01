@@ -10,17 +10,29 @@ public class PatientQueueImpl implements PatientQueue {
 
     /**
      * Method to add patient in the queue
+     *
      * @param patient Patient information
      */
 
     @Override
     public void addPatient(Patient patient) {
         queue.add(patient);
-        queue.sort(Comparator.comparingInt(Patient::getPriority));
+        ((LinkedList) queue).sort((p1, p2) -> {
+            List<String> priorities = Arrays.asList("Not Specified", "Low", "Medium", "High", "Urgent");
+            int p1Priority = priorities.indexOf(((Patient) p1).getPriority());
+            int p2Priority = priorities.indexOf(((Patient) p2).getPriority());
+
+            if (p2Priority - p1Priority != 0) {
+                return p2Priority - p1Priority;
+            }
+
+            return (int) (((Patient) p2).getTime().toEpochMilli() - ((Patient) p1).getTime().toEpochMilli());
+        });
     }
 
     /**
      * Method to find patient with the highest priority
+     *
      * @return Patient
      */
     @Override
@@ -30,6 +42,7 @@ public class PatientQueueImpl implements PatientQueue {
 
     /**
      * Delete a patient by ID
+     *
      * @param id Unique ID of a patient.
      */
     @Override
@@ -46,6 +59,7 @@ public class PatientQueueImpl implements PatientQueue {
 
     /**
      * Find details of a patient using a unique id.
+     *
      * @param id Unique ID of a patient.
      */
     @Override
@@ -58,7 +72,7 @@ public class PatientQueueImpl implements PatientQueue {
      */
     @Override
     public void displayAll() {
-        for (Patient patient: queue) {
+        for (Patient patient : queue) {
             System.out.println(patient);
         }
     }
