@@ -3,6 +3,7 @@ package patientqueue;
 import model.Patient;
 
 import java.util.Comparator;
+import java.util.ListIterator;
 import java.util.Stack;
 
 public class PatientStackImpl implements PatientQueue {
@@ -35,7 +36,14 @@ public class PatientStackImpl implements PatientQueue {
      */
     @Override
     public void deletePatientById(int id) {
-
+        ListIterator<Patient> iterator = (ListIterator<Patient>) stack.iterator();
+        while (iterator.hasNext()) {
+            Patient next = iterator.next();
+            if (next.getId() == id) {
+                iterator.remove();
+                return;
+            }
+        }
     }
 
     /**
