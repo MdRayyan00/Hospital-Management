@@ -49,12 +49,9 @@ public class PatientPriorityQueueImpl implements PatientQueue {
      */
     @Override
     public void deletePatientById(String id) {
-        ListIterator<Patient> iterator = (ListIterator<Patient>) queue.iterator();
-        while (iterator.hasNext()) {
-            Patient next = iterator.next();
-            if (Objects.equals(next.getId(), id)) {
-                iterator.remove();
-                return;
+        for (Patient patient : queue) {
+            if (Objects.equals(patient.getId(), id)) {
+                queue.remove(patient);
             }
         }
     }
