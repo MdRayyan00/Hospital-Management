@@ -3,23 +3,27 @@ package runner;
 import model.Patient;
 import patientqueue.PatientPriorityQueueImpl;
 import patientqueue.PatientQueue;
+import util.ExcelUtil;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.io.IOException;
+import java.util.List;
 
 public class HospitalManagementSystem {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        PatientQueue patientQueue = new PatientPriorityQueueImpl();
 
-        PatientQueue priorityQueue = new PatientPriorityQueueImpl();
+        List<Patient> patients = new ExcelUtil().getFromExcel();
+        for (Patient patient : patients) {
+            patientQueue.addPatient(patient);
+        }
 
-        Patient pranjal = new Patient("Pranjal", "Low", 12, Instant.now());
-        Patient rishabh = new Patient("Rishabh", "High", 13, Instant.now().minus(1, ChronoUnit.HOURS));
-        Patient raayan = new Patient("Rayyan", "Low", 14, Instant.now().plus(1, ChronoUnit.HOURS));
+        patientQueue.displayAll();
 
-        priorityQueue.addPatient(pranjal);
-        priorityQueue.addPatient(rishabh);
-        priorityQueue.addPatient(raayan);
+        Patient maxPriorityPatient = patientQueue.findMaxPriorityPatient();
+        while (maxPriorityPatient != null) {
+            System.out.println(maxPriorityPatient);
+            maxPriorityPatient = patientQueue.findMaxPriorityPatient();
+        }
 
-        priorityQueue.displayAll();
     }
 }

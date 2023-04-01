@@ -2,15 +2,12 @@ package patientqueue;
 
 import model.Patient;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class PatientPriorityQueueImpl implements PatientQueue {
     private final PriorityQueue<Patient> queue =
             new PriorityQueue<>((p1, p2) -> {
-                List<String> priorities = Arrays.asList("Not Specified", "Low", "Medium", "High", "Urgent");
+                List<String> priorities = Arrays.asList("Low", "Medium", "High", "Urgent");
                 int p1Priority = priorities.indexOf(p1.getPriority());
                 int p2Priority = priorities.indexOf(p2.getPriority());
 
@@ -18,7 +15,10 @@ public class PatientPriorityQueueImpl implements PatientQueue {
                     return p2Priority - p1Priority;
                 }
 
-                return (int) (p2.getTime().toEpochMilli() - p1.getTime().toEpochMilli());
+                long t2 = p2.getTime().toEpochMilli();
+                long t1 = p1.getTime().toEpochMilli();
+
+                return (int) (t2 - t1);
             });
 
 
@@ -39,7 +39,7 @@ public class PatientPriorityQueueImpl implements PatientQueue {
      */
     @Override
     public Patient findMaxPriorityPatient() {
-        return null;
+        return queue.poll();
     }
 
     /**
@@ -48,11 +48,11 @@ public class PatientPriorityQueueImpl implements PatientQueue {
      * @param id Unique ID of a patient.
      */
     @Override
-    public void deletePatientById(int id) {
+    public void deletePatientById(String id) {
         ListIterator<Patient> iterator = (ListIterator<Patient>) queue.iterator();
         while (iterator.hasNext()) {
             Patient next = iterator.next();
-            if (next.getId() == id) {
+            if (Objects.equals(next.getId(), id)) {
                 iterator.remove();
                 return;
             }
@@ -65,9 +65,9 @@ public class PatientPriorityQueueImpl implements PatientQueue {
      * @param id Unique ID of a patient.
      */
     @Override
-    public Patient findPatientById(int id) {
-        for (Patient patient: queue) {
-            if (patient.getId() == id) {
+    public Patient findPatientById(String id) {
+        for (Patient patient : queue) {
+            if (Objects.equals(patient.getId(), id)) {
                 return patient;
             }
         }

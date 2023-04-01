@@ -7,9 +7,9 @@ public interface PatientQueue {
 
     Patient findMaxPriorityPatient();
 
-    void deletePatientById(int id);
+    void deletePatientById(String id);
 
-    Patient findPatientById(int id);
+    Patient findPatientById(String id);
 
     void displayAll();
 }

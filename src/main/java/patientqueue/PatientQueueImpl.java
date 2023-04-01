@@ -46,11 +46,11 @@ public class PatientQueueImpl implements PatientQueue {
      * @param id Unique ID of a patient.
      */
     @Override
-    public void deletePatientById(int id) {
+    public void deletePatientById(String id) {
         ListIterator<Patient> iterator = (ListIterator<Patient>) queue.iterator();
         while (iterator.hasNext()) {
             Patient next = iterator.next();
-            if (next.getId() == id) {
+            if (next.getId().equals(id)) {
                 iterator.remove();
                 return;
             }
@@ -63,9 +63,9 @@ public class PatientQueueImpl implements PatientQueue {
      * @param id Unique ID of a patient.
      */
     @Override
-    public Patient findPatientById(int id) {
+    public Patient findPatientById(String id) {
         for (Patient patient: queue) {
-          if (patient.getId() == id) {
+          if (patient.getId().equals(id)) {
               return patient;
           }
         }
