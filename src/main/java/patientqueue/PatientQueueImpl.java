@@ -18,15 +18,18 @@ public class PatientQueueImpl implements PatientQueue {
     public void addPatient(Patient patient) {
         queue.add(patient);
         ((LinkedList) queue).sort((p1, p2) -> {
-            List<String> priorities = Arrays.asList("Not Specified", "Low", "Medium", "High", "Urgent");
-            int p1Priority = priorities.indexOf(((Patient) p1).getPriority());
+            List<String> priorities = Arrays.asList("Low", "Medium", "High", "Urgent");
+            int p1Priority = priorities.indexOf(((Patient) (p1)).getPriority());
             int p2Priority = priorities.indexOf(((Patient) p2).getPriority());
 
             if (p2Priority - p1Priority != 0) {
                 return p2Priority - p1Priority;
             }
 
-            return (int) (((Patient) p2).getTime().toEpochMilli() - ((Patient) p1).getTime().toEpochMilli());
+            long t2 = ((Patient) p2).getTime().toEpochMilli();
+            long t1 = ((Patient) (p1)).getTime().toEpochMilli();
+
+            return (int) (t2 - t1);
         });
     }
 
@@ -64,10 +67,10 @@ public class PatientQueueImpl implements PatientQueue {
      */
     @Override
     public Patient findPatientById(String id) {
-        for (Patient patient: queue) {
-          if (patient.getId().equals(id)) {
-              return patient;
-          }
+        for (Patient patient : queue) {
+            if (patient.getId().equals(id)) {
+                return patient;
+            }
         }
         return null;
     }
