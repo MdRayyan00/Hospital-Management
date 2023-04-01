@@ -9,7 +9,7 @@ public interface PatientQueue {
 
     void deletePatientById(int id);
 
-    void findPatientById(int id);
+    Patient findPatientById(int id);
 
     void displayAll();
 }

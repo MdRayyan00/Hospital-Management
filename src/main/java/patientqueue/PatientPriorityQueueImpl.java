@@ -65,8 +65,13 @@ public class PatientPriorityQueueImpl implements PatientQueue {
      * @param id Unique ID of a patient.
      */
     @Override
-    public void findPatientById(int id) {
-
+    public Patient findPatientById(int id) {
+        for (Patient patient: queue) {
+            if (patient.getId() == id) {
+                return patient;
+            }
+        }
+        return null;
     }
 
     /**
