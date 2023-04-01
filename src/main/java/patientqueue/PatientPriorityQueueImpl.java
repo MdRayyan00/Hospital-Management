@@ -18,7 +18,13 @@ public class PatientPriorityQueueImpl implements PatientQueue {
                 long t2 = p2.getTime().toEpochMilli();
                 long t1 = p1.getTime().toEpochMilli();
 
-                return (int) (t2 - t1);
+                if(t2 > t1){
+                    return -1;
+                } else if (t2 < t1) {
+                    return +1;
+                }
+
+                return 0;
             });
 
 

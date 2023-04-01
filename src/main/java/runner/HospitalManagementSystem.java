@@ -17,7 +17,7 @@ public class HospitalManagementSystem {
             patientQueue.addPatient(patient);
         }
 
-        patientQueue.displayAll();
+       // patientQueue.displayAll();
 
         Patient maxPriorityPatient = patientQueue.findMaxPriorityPatient();
         while (maxPriorityPatient != null) {
