@@ -1,13 +1,15 @@
 package model;
 
 import java.time.Instant;
+import java.util.Date;
 
 public class Patient {
     private String name;
     private String priority;
     private int id;
-    private Instant time;
+    private Instant date;
 
+<<<<<<< Updated upstream
     public Patient(String name, String priority, int id, Instant time) {
         this.name = name;
         this.priority = priority;
@@ -16,6 +18,13 @@ public class Patient {
     }
 
     public Patient() {
+=======
+    public Patient(String name, int priority, int id, Instant date) {
+        this.name = name;
+        this.priority = priority;
+        this.id = id;
+        this.date = date;
+>>>>>>> Stashed changes
     }
 
     public String getName() {
@@ -59,4 +68,12 @@ public class Patient {
                 ", time=" + time +
                 '}';
     }
+    public Instant getDate() {
+        return date;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
+    }
+
 }
