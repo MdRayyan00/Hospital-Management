@@ -29,10 +29,22 @@ public class HospitalManagementSystem {
         }
     }
 
+    private static void findAndDeletePatient(PatientQueue patientQueue) {
+        Instant startTime = Instant.now();
+        patientQueue.findPatientById("PatientID 1");
+        patientQueue.deletePatientById("PatientID 1");
+        Instant endTime = Instant.now();
+
+        System.out.println("Total Time to find and delete " + (endTime.toEpochMilli() - startTime.toEpochMilli()) + "ms");
+
+    }
+
     private static void hostpitalManagementWorkflow(int countSize, PatientQueue patientQueue, List<Patient> patients) {
         addPatients(countSize, patientQueue, patients);
 
         displayAllPatients(patientQueue);
+
+        findAndDeletePatient(patientQueue);
 
         treatAllPatientByPriority(patientQueue);
     }

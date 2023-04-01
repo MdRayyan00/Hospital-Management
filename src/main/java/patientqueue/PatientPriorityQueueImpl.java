@@ -2,7 +2,10 @@ package patientqueue;
 
 import model.Patient;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.PriorityQueue;
 
 public class PatientPriorityQueueImpl implements PatientQueue {
     private final PriorityQueue<Patient> queue =
@@ -18,7 +21,7 @@ public class PatientPriorityQueueImpl implements PatientQueue {
                 long t2 = p2.getTime().toEpochMilli();
                 long t1 = p1.getTime().toEpochMilli();
 
-                if(t2 > t1){
+                if (t2 > t1) {
                     return -1;
                 } else if (t2 < t1) {
                     return +1;
@@ -55,11 +58,16 @@ public class PatientPriorityQueueImpl implements PatientQueue {
      */
     @Override
     public void deletePatientById(String id) {
+        Patient p = null;
+
         for (Patient patient : queue) {
             if (Objects.equals(patient.getId(), id)) {
-                queue.remove(patient);
+                p = patient;
+                break;
             }
         }
+
+        queue.remove(p);
     }
 
     /**
