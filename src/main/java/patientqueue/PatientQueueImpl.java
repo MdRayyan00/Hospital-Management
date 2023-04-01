@@ -2,23 +2,21 @@ package patientqueue;
 
 import model.Patient;
 
-import java.util.Comparator;
-import java.util.ListIterator;
-import java.util.Stack;
+import java.util.*;
 
-public class PatientStackImpl implements PatientQueue {
+public class PatientQueueImpl implements PatientQueue {
 
-    Stack<Patient> stack = new Stack<>();
+    Queue<Patient> queue = new LinkedList<>();
 
     /**
-     * Method to add patient in the stack
+     * Method to add patient in the queue
      * @param patient Patient information
      */
 
     @Override
     public void addPatient(Patient patient) {
-        stack.add(patient);
-        stack.sort(Comparator.comparingInt(Patient::getPriority));
+        queue.add(patient);
+        queue.sort(Comparator.comparingInt(Patient::getPriority));
     }
 
     /**
@@ -27,7 +25,7 @@ public class PatientStackImpl implements PatientQueue {
      */
     @Override
     public Patient findMaxPriorityPatient() {
-        return stack.pop();
+        return queue.peek();
     }
 
     /**
@@ -36,7 +34,7 @@ public class PatientStackImpl implements PatientQueue {
      */
     @Override
     public void deletePatientById(int id) {
-        ListIterator<Patient> iterator = (ListIterator<Patient>) stack.iterator();
+        ListIterator<Patient> iterator = (ListIterator<Patient>) queue.iterator();
         while (iterator.hasNext()) {
             Patient next = iterator.next();
             if (next.getId() == id) {
@@ -60,7 +58,7 @@ public class PatientStackImpl implements PatientQueue {
      */
     @Override
     public void displayAll() {
-        for (Patient patient: stack) {
+        for (Patient patient: queue) {
             System.out.println(patient);
         }
     }
