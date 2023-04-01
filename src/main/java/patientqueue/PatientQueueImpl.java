@@ -40,7 +40,7 @@ public class PatientQueueImpl implements PatientQueue {
      */
     @Override
     public Patient findMaxPriorityPatient() {
-        return queue.peek();
+        return queue.poll();
     }
 
     /**
@@ -81,7 +81,7 @@ public class PatientQueueImpl implements PatientQueue {
     @Override
     public void displayAll() {
         for (Patient patient : queue) {
-            System.out.println(patient);
+            //System.out.println(patient);
         }
     }
 }

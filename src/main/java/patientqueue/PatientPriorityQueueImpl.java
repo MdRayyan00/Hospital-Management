@@ -80,7 +80,8 @@ public class PatientPriorityQueueImpl implements PatientQueue {
     @Override
     public void displayAll() {
         for (Patient nextPatient : queue) {
-            System.out.println(nextPatient);
+            // avoiding print as the input size is quite big and important messages of time capture are ignored.
+            //System.out.println(nextPatient);
         }
     }
 
